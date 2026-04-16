@@ -8,7 +8,7 @@ const AuthLayout = ({ children }) => {
             <div className='w-full md:w-1/2 flex flex-col justify-center px-8 sm:px-16 lg:px-24 py-12'>
 
                 {/* Logo */}
-                <h2 className='text-2xl font-bold text-gray-900 tracking-tight mb-10'>
+                <h2 className='text-2xl font-bold text-gray-900 tracking-tight mb-10 ml-8'>
                     Collab Flow
                 </h2>
 

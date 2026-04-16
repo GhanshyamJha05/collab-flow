@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from '../../components/layouts/AuthLayout.jsx';
 import Input from '../../components/inputs/Input.jsx';
 import { validateEmail } from '../../utils/helper.js';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { API_PATHS } from '../../utils/apiPaths.js';
 
 const Login = () => {
 
@@ -27,6 +29,34 @@ const Login = () => {
         }
 
         setError("");
+
+        //* login API call
+        try {
+            const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+                email,
+                password
+            });
+
+            const { token, role } = response.data;
+
+            if (token) {
+                localStorage.setItem("token", token);
+
+                //* redirect based on role
+                if (role === "admin") {
+                    navigate("/admin/dashboard");
+                } else {
+                    navigate("/user/dashboard");
+                }
+            }
+
+        } catch (error) {
+            if (error.response && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("Something went wrong. Please try again later.");
+            }
+        }
     }
 
     return (
