@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from '../../components/layouts/AuthLayout.jsx';
 import Input from '../../components/inputs/Input.jsx';
 import { validateEmail } from '../../utils/helper.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths.js';
+import { UserContext } from '../../context/userContext.jsx';
 
 const Login = () => {
 
@@ -12,6 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
 
+    const { updateUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     //* handle login form submit
@@ -41,6 +43,7 @@ const Login = () => {
 
             if (token) {
                 localStorage.setItem("token", token);
+                updateUser(response.data);
 
                 //* redirect based on role
                 if (role === "admin") {

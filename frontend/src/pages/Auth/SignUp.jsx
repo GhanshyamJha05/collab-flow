@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import AuthLayout from '../../components/layouts/AuthLayout.jsx'
 import { validateEmail } from '../../utils/helper.js';
 import ProfilePhotoSelector from '../../components/inputs/ProfilePhotoSelector.jsx';
 import Input from '../../components/inputs/Input.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { API_PATHS } from '../../utils/apiPaths.js';
+import { UserContext } from '../../context/userContext.jsx';
+import uploadImage from '../../utils/uploadImage.js';
 
 const SignUp = () => {
 
@@ -15,9 +19,14 @@ const SignUp = () => {
 
     const [error, setError] = useState(null);
 
+    const { updateUser } = useContext(UserContext);
+    const navigate = useNavigate();
+
     //* handle sign up form submit
     const handleSignUp = async (e) => {
         e.preventDefault();
+
+        let profileImageUrl = '';
 
         if (!fullName) {
             setError("Please enter a full name");
@@ -38,9 +47,40 @@ const SignUp = () => {
 
         //* sign up API call
         try {
+            //* upload profile image if present
+            if (profilePic) {
+                const imgUploadRes = await uploadImage(profilePic);
+                profileImageUrl = imgUploadRes.imageUrl || "";
+            }
+
+            const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+                name: fullName,
+                email,
+                password,
+                profileImageUrl,
+                adminInviteToken
+            });
+
+            const { token, role } = response.data;
+
+            if (token) {
+                localStorage.setItem("token", token);
+                updateUser(response.data);
+
+                //* redirect based on role
+                if (role === "admin") {
+                    navigate("/admin/dashboard");
+                } else {
+                    navigate("/user/dashboard");
+                }
+            }
 
         } catch (error) {
-
+            if (error.response && error.response.data.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("Something went wrong. Please try again later.");
+            }
         }
     }
 
@@ -89,8 +129,8 @@ const SignUp = () => {
                         />
 
                         <Input
-                            value={password}
-                            onChange={({ target }) => setPassword(target.value)}
+                            value={adminInviteToken}
+                            onChange={({ target }) => setAdminInviteToken(target.value)}
                             label="Admin Invite Token"
                             placeholder="Enter your 6-Digit token"
                             type="number"
