@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
 
-const ProfilePhotoSelector = ({ image, setImage }) => {
+const ProfilePhotoSelector = ({ image, setImage, name }) => {  // ← name add kiya
 
     const inputRef = useRef(null);
     const [previewUrl, setPrevireUrl] = useState(null);
@@ -9,10 +9,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            //* update the image state
             setImage(file);
-
-            //* generate preview url from the file
             const preview = URL.createObjectURL(file);
             setPrevireUrl(preview);
         }
@@ -20,12 +17,15 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
 
     const handleRemoveImage = () => {
         setImage(null);
-        setPrevireUrl(null)
+        setPrevireUrl(null);
     };
 
     const onChooseFile = () => {
         inputRef.current.click();
     };
+
+    // ← naam ka pehla letter nikalo
+    const firstLetter = name ? name.charAt(0).toUpperCase() : null;
 
     return (
         <div className='flex justify-center mb-6'>
@@ -39,7 +39,15 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
 
             {!image ? (
                 <div className='w-20 h-20 flex items-center justify-center bg-blue-100/50 rounded-full relative cursor-pointer'>
-                    <LuUser className='text-4xl text-primary' />
+
+                    {/* ← yahan change kiya: letter ya icon */}
+                    {firstLetter ? (
+                        <span className='text-2xl font-bold text-primary'>
+                            {firstLetter}
+                        </span>
+                    ) : (
+                        <LuUser className='text-4xl text-primary' />
+                    )}
 
                     <button
                         type='button'
@@ -65,7 +73,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default ProfilePhotoSelector
+export default ProfilePhotoSelector;

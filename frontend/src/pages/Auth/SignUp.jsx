@@ -99,7 +99,7 @@ const SignUp = () => {
                 <form onSubmit={handleSignUp} className='space-y-6'>
 
                     <div className='flex justify-center'>
-                        <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+                        <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} name={fullName} />
                     </div>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>

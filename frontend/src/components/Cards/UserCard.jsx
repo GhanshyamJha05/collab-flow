@@ -5,11 +5,17 @@ const UserCard = ({ userInfo }) => {
         <div className='user-card p-2'>
             <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-3'>
-                    <img
-                        src={userInfo?.profileImageUrl}
-                        alt={`Avatar`}
-                        className='w-12 h-12 rounded-full border-2 border-white'
-                    />
+                    {userInfo?.profileImageUrl ? (
+                        <img
+                            src={userInfo?.profileImageUrl}
+                            alt={`Avatar`}
+                            className='w-12 h-12 rounded-full border-2 border-white'
+                        />
+                    ) : (
+                        <div className='w-12 h-12 flex items-center justify-center bg-primary text-white text-sm font-bold rounded-full border-2 border-white'>
+                            {userInfo?.name ? userInfo.name.charAt(0).toUpperCase() : "?"}
+                        </div>
+                    )}
 
                     <div>
                         <p className='text-sm font-medium'>{userInfo?.name}</p>
