@@ -8,7 +8,7 @@ import AvatarGroup from '../AvatarGroup';
 const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
 
     const [allUsers, setAllUsers] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [tempSelectedUsers, setTempSelectedUsers] = useState([]);
 
     const getAllUsers = async () => {
@@ -78,7 +78,7 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
                         >
                             <img src={user.profileImageUrl} alt={user.name} className='w-10 h-10 rounded-full' />
                             <div className='flex-1'>
-                                <p className='font-medium text-gray-900 dark:text-white'>
+                                <p className='font-medium text-gray-900 dark:text-black'>
                                     {user.name}
                                 </p>
                                 <p className='text-[13px] text-gray-600'>{user.email}</p>
