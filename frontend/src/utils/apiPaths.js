@@ -1,4 +1,4 @@
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:5173";
 
 //* utils/apiPaths.js
 export const API_PATHS = {
