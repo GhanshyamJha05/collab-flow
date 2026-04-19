@@ -54,7 +54,7 @@ const MyTasks = () => {
     return (
         <DashboardLayout activeMenu="My Tasks">
             <div className='my-5'>
-                <div className='flex flex-col lg:flex-row lg:items-center justify-between'>
+                <div className='flex flex-col gap-3'>
                     <h2 className='text-xl md:text-xl font-bold'>My Tasks</h2>
 
                     {tabs?.[0]?.count > 0 && (
@@ -66,7 +66,7 @@ const MyTasks = () => {
                     )}
                 </div>
 
-                <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 items-start'>
                     {allTasks.map((item, index) => (
                         <TaskCard
                             key={item._id}
@@ -77,9 +77,9 @@ const MyTasks = () => {
                             progress={item.progress}
                             createdAt={item.createdAt}
                             dueDate={item.dueDate}
-                            assignedTo={item.assignedTo?.map((item) => ({
-                                image: item.profileImageUrl || null,
-                                name: item.name || ""
+                            assignedTo={item.assignedTo?.map((u) => ({
+                                image: u.profileImageUrl || null,
+                                name: u.name || ""
                             }))}
                             attachmentCount={item.attachments?.length || 0}
                             completedTodoCount={item.completedTodoCount || 0}

@@ -3,7 +3,7 @@ import React from 'react'
 const TaskStatusTabs = ({ tabs, activeTab, setActiveTab }) => {
     return (
         <div className='my-2'>
-            <div className='flex'>
+            <div className='flex overflow-x-auto scrollbar-hide'>
                 {tabs.map((tab) => (
                     <button
                         key={tab.label}

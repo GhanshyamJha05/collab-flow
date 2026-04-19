@@ -29,7 +29,7 @@ const TaskCard = ({ title, description, priority, status, progress, createdAt, d
     }
 
     return (
-        <div className='bg-white rounded-2xl py-4 shadow-md shadow-gray-200 border border-gray-300/50 cursor-pointer' onClick={onClick}>
+        <div className='h-full flex flex-col justify-between bg-white rounded-2xl py-4 shadow-md shadow-gray-200 border border-gray-300/50 cursor-pointer' onClick={onClick}>
             <div className='flex items-end gap-3 px-4'>
                 <div className={`text-[11px] font-medium ${getStatusTagColor()} px-4 py-0.5 rounded`}>
                     {status}
