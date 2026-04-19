@@ -13,7 +13,10 @@ const app = express();
 
 //* middleware to handle CORS
 app.use(cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: [
+        process.env.CLIENT_URL,
+        "http://localhost:5173"
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }))
@@ -47,4 +50,4 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 //* export server for vercel
-export default app;
+// export default app;
