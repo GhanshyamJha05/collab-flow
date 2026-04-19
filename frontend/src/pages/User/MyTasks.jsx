@@ -54,7 +54,7 @@ const MyTasks = () => {
     return (
         <DashboardLayout activeMenu="My Tasks">
             <div className='my-5'>
-                <div className='flex flex-col gap-3'>
+                <div className='flex'>
                     <h2 className='text-xl md:text-xl font-bold'>My Tasks</h2>
 
                     {tabs?.[0]?.count > 0 && (
