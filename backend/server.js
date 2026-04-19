@@ -34,9 +34,9 @@ app.use("/api/reports", reportRoutes);
 //* serve uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// app.get("/", (req, res) => {
-//     res.send("API is running...");
-// });
+app.get("/", (req, res) => {
+    res.send("API is running...");
+});
 
 //* start server
 if (process.env.NODE_ENV !== "production") {
