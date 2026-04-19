@@ -29,32 +29,36 @@ const TaskCard = ({ title, description, priority, status, progress, createdAt, d
     }
 
     return (
-        <div className='h-full flex flex-col justify-between bg-white rounded-2xl py-4 shadow-md shadow-gray-200 border border-gray-300/50 cursor-pointer' onClick={onClick}>
-            <div className='flex items-end gap-3 px-4'>
-                <div className={`text-[11px] font-medium ${getStatusTagColor()} px-4 py-0.5 rounded`}>
+        <div className='w-full max-w-full sm:max-w-md mx-auto bg-white rounded-xl sm:rounded-2xl py-3 sm:py-4 shadow-md shadow-gray-200 border border-gray-300/50 cursor-pointer' onClick={onClick}>
+
+            {/* Tags */}
+            <div className='flex items-center gap-2 px-3 sm:px-4 flex-wrap'>
+                <div className={`text-[10px] sm:text-[11px] font-medium ${getStatusTagColor()} px-3 sm:px-4 py-0.5 rounded`}>
                     {status}
                 </div>
 
-                <div className={`test-[11px] font-medium ${getPriorityTagColor()} px-4 py-0.5 rounded`}>
+                <div className={`text-[10px] sm:text-[11px] font-medium ${getPriorityTagColor()} px-3 sm:px-4 py-0.5 rounded`}>
                     {priority} Priority
                 </div>
             </div>
 
-            <div className={`px-4 border-l-[3px] ${status === "In Progress"
+            {/* Content */}
+            <div className={`px-3 sm:px-4 border-l-[3px] mt-2 ${status === "In Progress"
                 ? "border-cyan-600"
                 : status === "Completed"
                     ? "border-indigo-600"
                     : "border-violet-600"
                 }`}>
-                <p className='text-sm font-medium text-gray-900 mt-4 line-clamp-2'>
+
+                <p className='text-sm sm:text-base font-medium text-gray-900 mt-3 line-clamp-2'>
                     {title}
                 </p>
 
-                <p className='text-xs text-gray-600 mt-1.5 line-clamp-2 leading-4.5'>
+                <p className='text-xs sm:text-sm text-gray-600 mt-1.5 line-clamp-2 leading-5'>
                     {description}
                 </p>
 
-                <p className='text-[13px] text-gray-800/90 font-medium mt-2 mb-2 leading-4.5'>
+                <p className='text-xs sm:text-[13px] text-gray-800/90 font-medium mt-2 mb-2'>
                     Task Done:{" "}
                     <span className='font-semibold text-gray-800'>
                         {completedTodoCount} / {todoChecklist.length || 0}
@@ -64,30 +68,34 @@ const TaskCard = ({ title, description, priority, status, progress, createdAt, d
                 <Progress progress={progress} status={status} />
             </div>
 
-            <div className='px-4'>
-                <div className='flex items-center justify-between my-1'>
+            {/* Dates */}
+            <div className='px-3 sm:px-4 mt-2'>
+                <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2'>
                     <div>
-                        <label className='text-xs text-gray-600'>Start Date</label>
-                        <p className='text-[13px] text-gray-900 font-medium'>
+                        <label className='text-[11px] sm:text-xs text-gray-600'>Start Date</label>
+                        <p className='text-xs sm:text-[13px] text-gray-900 font-medium'>
                             {moment(createdAt).format("Do MMM YYYY")}
                         </p>
                     </div>
 
                     <div>
-                        <label className='text-xs text-gray-600'>Due Date</label>
-                        <p className='text-[13px] text-gray-900 font-medium'>
+                        <label className='text-[11px] sm:text-xs text-gray-600'>Due Date</label>
+                        <p className='text-xs sm:text-[13px] text-gray-900 font-medium'>
                             {moment(dueDate).format("Do MMM YYYY")}
                         </p>
                     </div>
                 </div>
 
-                <div className='flex items-center justify-between mt-3'>
+                {/* Bottom Section */}
+                <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between mt-3 gap-2'>
                     <AvatarGroup avatars={assignedTo || []} />
 
                     {attachmentCount > 0 && (
-                        <div className='flex items-center gap-2 bg-blue-100 px-2.5 py-1.5 rounded-2xl'>
-                            <LuPaperclip className='text-primary' />{" "}
-                            <span className='text-xs text-gray-900'>{attachmentCount}</span>
+                        <div className='flex items-center gap-1.5 bg-blue-100 px-2 py-1 rounded-xl w-fit'>
+                            <LuPaperclip className='text-primary text-sm' />
+                            <span className='text-[11px] sm:text-xs text-gray-900'>
+                                {attachmentCount}
+                            </span>
                         </div>
                     )}
                 </div>
