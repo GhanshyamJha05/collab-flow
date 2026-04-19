@@ -14,7 +14,8 @@ const app = express();
 //* middleware to handle CORS
 app.use(cors({
     origin: [
-        process.env.CLIENT_URL,
+        // process.env.CLIENT_URL,
+        "https://collaspace.netlify.app",
         "http://localhost:5173"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
