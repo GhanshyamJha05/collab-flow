@@ -77,7 +77,10 @@ const MyTasks = () => {
                             progress={item.progress}
                             createdAt={item.createdAt}
                             dueDate={item.dueDate}
-                            assignedTo={item.assignedTo?.map((item) => item.profileImageUrl)}
+                            assignedTo={item.assignedTo?.map((item) => ({
+                                image: item.profileImageUrl || null,
+                                name: item.name || ""
+                            }))}
                             attachmentCount={item.attachments?.length || 0}
                             completedTodoCount={item.completedTodoCount || 0}
                             todoChecklist={item.todoChecklist || []}
