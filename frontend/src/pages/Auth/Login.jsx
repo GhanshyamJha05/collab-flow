@@ -33,6 +33,7 @@ const Login = () => {
         }
 
         setError("");
+        setLoading(true);
 
         try {
             const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
@@ -61,6 +62,8 @@ const Login = () => {
             } else {
                 setError("Network issue. Please try again.");
             }
+        } finally {
+            setLoading(false); 
         }
     }
 
