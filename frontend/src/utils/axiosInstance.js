@@ -3,7 +3,7 @@ import { VITE_BASE_URL } from "./apiPaths.js";
 
 const axiosInstance = axios.create({
     baseURL: VITE_BASE_URL,
-    timeout: 10000,
+    timeout: 20000,
     headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -40,7 +40,10 @@ axiosInstance.interceptors.response.use(
                 console.error("Server error. Please try again later.");
             }
         } else if (error.code === "ECONNABORTED") {
-            console.error("Request timeout. Please try again.")
+            console.warn("Slow network... retrying or waiting");
+            return Promise.reject({
+                message: "Server is taking too long. Please wait..."
+            });
         }
         return Promise.reject(error);
     }

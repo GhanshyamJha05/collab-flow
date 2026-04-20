@@ -174,7 +174,9 @@ const InfoBox = ({ label, value }) => {
     return <>
         <label className='text-xs font-medium text-slate-600'>{label}</label>
 
-        <p className='text-[12px] md:text-[13px] font-medium text-gray-800 mt-0.5'>{value}</p>
+        <p className='text-[12px] md:text-[13px] font-medium text-gray-800 mt-0.5 whitespace-pre-line'>
+            {value}
+        </p>
     </>
 }
 

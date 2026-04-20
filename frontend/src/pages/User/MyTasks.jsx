@@ -6,7 +6,7 @@ import { API_PATHS } from '../../utils/apiPaths.js';
 import { LuFileSpreadsheet, LuSpeaker } from 'react-icons/lu';
 import TaskStatusTabs from '../../components/TaskStatusTabs.jsx';
 import TaskCard from '../../components/Cards/TaskCard.jsx';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 
 const MyTasks = () => {
 
@@ -53,9 +53,11 @@ const MyTasks = () => {
 
     return (
         <DashboardLayout activeMenu="My Tasks">
-            <div className='my-5'>
-                <div className='flex'>
-                    <h2 className='text-xl md:text-xl font-bold'>My Tasks</h2>
+            <div className='my-5 px-3 sm:px-0'>
+                <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
+                    <h2 className='text-xl md:text-xl font-bold'>
+                        My Tasks
+                    </h2>
 
                     {tabs?.[0]?.count > 0 && (
                         <TaskStatusTabs

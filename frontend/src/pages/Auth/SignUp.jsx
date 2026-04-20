@@ -4,6 +4,7 @@ import { validateEmail } from '../../utils/helper.js';
 import ProfilePhotoSelector from '../../components/inputs/ProfilePhotoSelector.jsx';
 import Input from '../../components/inputs/Input.jsx';
 import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft } from "lucide-react";
 import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths.js';
 import { UserContext } from '../../context/userContext.jsx';
@@ -16,7 +17,6 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [adminInviteToken, setAdminInviteToken] = useState('');
-
     const [error, setError] = useState(null);
 
     const { updateUser } = useContext(UserContext);
@@ -45,9 +45,7 @@ const SignUp = () => {
 
         setError("");
 
-        //* sign up API call
         try {
-            //* upload profile image if present
             if (profilePic) {
                 const imgUploadRes = await uploadImage(profilePic);
                 profileImageUrl = imgUploadRes.imageUrl || "";
@@ -67,7 +65,6 @@ const SignUp = () => {
                 localStorage.setItem("token", token);
                 updateUser(response.data);
 
-                //* redirect based on role
                 if (role === "admin") {
                     navigate("/admin/dashboard");
                 } else {
@@ -86,7 +83,22 @@ const SignUp = () => {
 
     return (
         <AuthLayout>
-            <div className='w-full max-w-lg mx-auto flex flex-col justify-center mt-8 lg:ml-10 md:mt-12'>
+            {/* ✅ relative + pt added for spacing */}
+            <div className='w-full max-w-lg mx-auto flex flex-col justify-center mt-8 lg:ml-10 md:mt-12 relative pt-4'>
+
+                {/* 🔙 BACK BUTTON */}
+                <div className="mb-3">
+                    <button
+                        onClick={() => navigate(-1) || navigate("/")}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 font-medium shadow-sm hover:bg-blue-100 hover:shadow-md hover:scale-105 transition-all duration-300 cursor-pointer group"
+                    >
+                        <ArrowLeft
+                            size={18}
+                            className="group-hover:-translate-x-1 transition-transform duration-300"
+                        />
+                        <span className="text-sm">Back</span>
+                    </button>
+                </div>
 
                 <h3 className='text-2xl font-bold text-gray-900 tracking-tight'>
                     Create an Account ✨
@@ -166,4 +178,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default SignUp;

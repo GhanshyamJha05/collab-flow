@@ -14,6 +14,9 @@ import ViewTaskDetails from './pages/User/ViewTaskDetails.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 import UserProvider, { UserContext } from './context/userContext.jsx'
 import { Toaster } from 'react-hot-toast'
+import Home from './pages/Landing/Home.jsx'
+import Features from './pages/Landing/Features.jsx'
+import About from './pages/Landing/About.jsx'
 
 const App = () => {
     return (
@@ -21,6 +24,12 @@ const App = () => {
             <div>
                 <Router>
                     <Routes>
+                        {/* Public Routes */}
+                        <Route path='/' element={<Home />} />
+                        <Route path='/features' element={<Features />} />
+                        <Route path='/about' element={<About />} />
+
+                        {/* Auth Routes */}
                         <Route path='/login' element={<Login />} />
                         <Route path='/signup' element={<SignUp />} />
 
@@ -40,7 +49,7 @@ const App = () => {
                         </Route>
 
                         {/* Default Route */}
-                        <Route path='/' element={<Root />} />
+                        {/* <Route path='/' element={<Home />} /> */}
                     </Routes>
                 </Router>
             </div>
