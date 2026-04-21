@@ -55,10 +55,10 @@ const Login = () => {
             }
 
         } catch (error) {
-            if (error.message) {
-                setError(error.message);
-            } else if (error.response && error.response.data.message) {
+            if (error.response && error.response.data.message) {
                 setError(error.response.data.message);
+            } else if (error.message) {
+                setError(error.message);
             } else {
                 setError("Network issue. Please try again.");
             }
