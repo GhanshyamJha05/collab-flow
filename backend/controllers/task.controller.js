@@ -304,7 +304,7 @@ const updateTaskChecklist = async (req, res) => {
         } else if (task.progress > 0) {
             task.status = "In Progress";
         } else {
-            task.progress = "Pending";
+            task.status = "Pending";
         }
 
         await task.save();
