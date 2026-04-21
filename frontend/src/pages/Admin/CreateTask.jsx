@@ -102,7 +102,7 @@ const CreateTask = () => {
 
             toast.success("Task updated successfully");
         } catch (error) {
-            console.error("Error creating task: ", error);
+            console.error("Error updating task: ", error);
         } finally {
             setLoading(false);
         }
