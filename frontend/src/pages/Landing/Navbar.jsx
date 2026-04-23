@@ -40,7 +40,7 @@ const Navbar = () => {
             {/* NAVBAR WRAPPER */}
             <div className="fixed top-3 left-0 w-full z-50 flex justify-center px-3">
 
-                <nav className="w-full max-w-6xl bg-white/70 backdrop-blur-lg border border-gray-100 shadow-sm rounded-3xl px-4 py-2.5 flex items-center justify-between transition-all duration-300">
+                <nav className="w-full max-w-6xl bg-white/70 backdrop-blur-lg border border-gray-100 shadow-sm rounded-4xl px-4 py-2.5 flex items-center justify-between transition-all duration-300">
 
                     {/* LEFT */}
                     <div className="flex items-center justify-between w-full md:w-auto gap-3">
