@@ -49,5 +49,13 @@ export const API_PATHS = {
         SEND_MESSAGE: "/api/messages",  //* send a message into a particular group (admin & user both)
         GET_MESSAGES: (groupId) => `/api/messages/${groupId}`,  //* get messages (admin & user both)
         DELETE_MESSAGE: (messageId) => `/api/messages/${messageId}`,  //* delete messages from a group 
-    }
+    },
+
+    POLLS: {
+        GET_ALL_POLLS: "/api/polls",  //* get all polls (logged-in users)
+        CREATE_POLL: "/api/polls/create",  //* create poll (admin only)
+        VOTE_POLL: "/api/polls/vote",  //* vote on poll (logged-in users)
+
+        // GET_POLL_BY_ID: (pollId) => `/api/polls/${pollId}`,  //* optional (future use)
+    },
 };
