@@ -17,12 +17,15 @@ import { Toaster } from 'react-hot-toast'
 import Home from './pages/Landing/Home.jsx'
 import Features from './pages/Landing/Features.jsx'
 import About from './pages/Landing/About.jsx'
+import ScrollToTop from './components/ScrollToTop.jsx'
 
 const App = () => {
     return (
         <UserProvider>
             <div>
                 <Router>
+                    <ScrollToTop />
+
                     <Routes>
                         {/* Public Routes */}
                         <Route path='/' element={<Home />} />
