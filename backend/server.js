@@ -11,6 +11,7 @@ const taskRoutes = require('./routes/task.routes.js');
 const reportRoutes = require("./routes/report.routes.js");
 const groupRoutes = require("./routes/group.route.js");
 const messageRoutes = require("./routes/message.route.js");
+const pollRoutes = require("./routes/poll.routes.js");
 
 const { Server } = require("socket.io");
 const Message = require("./models/message.model.js");
@@ -43,6 +44,7 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/groups", groupRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/polls", pollRoutes);
 
 const io = new Server(server, {
     cors: {
