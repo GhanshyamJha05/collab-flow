@@ -128,15 +128,14 @@ const Navbar = () => {
                         {!user ? (
                             <>
                                 <Link to="/login">
-                                    <button className="px-5 py-1.5 text-sm font-semibold text-indigo-600 border border-indigo-200 rounded-full bg-white hover:-translate-y-1 hover:shadow-lg transition-all duration-300 hover:bg-indigo-50 active:scale-95 cursor-pointer shadow-sm">
+                                    <button className="px-6 py-2 text-base font-semibold text-blue-600 border border-blue-600 rounded-full bg-white transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
                                         Login
                                     </button>
                                 </Link>
 
                                 <Link to="/signup">
-                                    <button className="px-6 py-1.5 text-sm font-semibold text-white rounded-full bg-gradient-to-r from-indigo-600 via-blue-600 to-sky-500 shadow-md active:scale-95 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer relative overflow-hidden">
-                                        <span className="absolute inset-0 bg-white/20 opacity-0 hover:opacity-100 transition blur-md"></span>
-                                        <span className="relative z-10">Signup</span>
+                                    <button className="px-6 py-2 text-base font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-200 cursor-pointer">
+                                        Signup
                                     </button>
                                 </Link>
                             </>
