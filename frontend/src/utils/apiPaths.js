@@ -20,7 +20,7 @@ export const API_PATHS = {
         GET_DASHBOARD_DATA: "/api/tasks/dashboard-data",  //* get dashboard data
         GET_USER_DASHBOARD_DATA: "/api/tasks/user-dashboard-data",  //* get user dashboard data
         GET_ALL_TASKS: "/api/tasks",  //* get all tasks (admin: all, user: only assigned tasks)
-        GET_TASK_BY_ID: (userId) => `/api/tasks/${userId}`,  //* get task by id
+        GET_TASK_BY_ID: (taskId) => `/api/tasks/${taskId}`,  //* get task by id
         CREATE_TASK: "/api/tasks",  //* create a new task (admin only)
         UPDATE_TASK: (taskId) => `/api/tasks/${taskId}`,  //* update task details
         DELETE_TASK: (taskId) => `/api/tasks/${taskId}`,  //* delete a task (admin only)
