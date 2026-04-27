@@ -17,12 +17,19 @@ import { Toaster } from 'react-hot-toast'
 import Home from './pages/Landing/Home.jsx'
 import Features from './pages/Landing/Features.jsx'
 import About from './pages/Landing/About.jsx'
+import ScrollToTop from './components/ScrollToTop.jsx'
+import MyGroups from './pages/User/MyGroups.jsx'
+import AdminGroups from './pages/Admin/AdminGroups.jsx'
+import CreatePolls from './pages/Admin/CreatePolls.jsx'
+import MyPolls from './pages/User/MyPolls.jsx'
 
 const App = () => {
     return (
         <UserProvider>
             <div>
                 <Router>
+                    <ScrollToTop />
+
                     <Routes>
                         {/* Public Routes */}
                         <Route path='/' element={<Home />} />
@@ -39,6 +46,8 @@ const App = () => {
                             <Route path='/admin/tasks' element={<ManageTasks />} />
                             <Route path='/admin/create-task' element={<CreateTask />} />
                             <Route path='/admin/users' element={<ManageUsers />} />
+                            <Route path='/admin/groups' element={<AdminGroups />} />
+                            <Route path='/admin/polls' element={<CreatePolls />} />
                         </Route>
 
                         {/* User Routes */}
@@ -46,6 +55,8 @@ const App = () => {
                             <Route path='/user/dashboard' element={<UserDashboard />} />
                             <Route path='/user/tasks' element={<MyTasks />} />
                             <Route path='/user/task-details/:id' element={<ViewTaskDetails />} />
+                            <Route path='/user/groups' element={<MyGroups />} />
+                            <Route path='/user/polls' element={<MyPolls />} />
                         </Route>
 
                         {/* Default Route */}

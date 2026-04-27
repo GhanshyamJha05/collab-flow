@@ -1,4 +1,4 @@
-import { LuLayoutDashboard, LuUsers, LuClipboardCheck, LuSquarePlus, LuLogOut } from "react-icons/lu";
+import { LuLayoutDashboard, LuUsers, LuClipboardCheck, LuSquarePlus, LuLogOut, LuMessageSquare, LuListTodo } from "react-icons/lu";
 
 export const SIDE_MENU_DATA = [
     {
@@ -20,13 +20,25 @@ export const SIDE_MENU_DATA = [
         path: "/admin/create-task",
     },
     {
-        id: "01",
+        id: "04",
         label: "Team Members",
         icon: LuUsers,
         path: "/admin/users",
     },
     {
         id: "05",
+        label: "Manage Groups",
+        icon: LuMessageSquare,
+        path: "/admin/groups",
+    },
+    {
+        id: "06",
+        label: "Create Polls",
+        icon: LuListTodo,
+        path: "/admin/polls",
+    },
+    {
+        id: "07",
         label: "Logout",
         icon: LuLogOut,
         path: "logout",
@@ -48,6 +60,18 @@ export const SIDE_MENU_USER_DATA = [
     },
     {
         id: "03",
+        label: "My Groups",
+        icon: LuMessageSquare,
+        path: "/user/groups",
+    },
+    {
+        id: "04",
+        label: "My Polls",
+        icon: LuListTodo,
+        path: "/user/polls",
+    },
+    {
+        id: "05",
         label: "Logout",
         icon: LuLogOut,
         path: "logout",

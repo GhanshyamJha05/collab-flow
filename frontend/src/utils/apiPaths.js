@@ -1,4 +1,4 @@
-export const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:5000";
+export const VITE_BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8000";
 
 //* utils/apiPaths.js
 export const API_PATHS = {
@@ -35,5 +35,27 @@ export const API_PATHS = {
 
     IMAGE: {
         UPLOAD_IMAGE: "/api/auth/upload-image"
-    }
+    },
+
+    GROUPS: {
+        CREATE_GROUP: "/api/groups",  //* create a group (admin only)
+        GET_MY_GROUPS: "/api/groups",  //* get my groups where admin and members should be added
+        ADD_MEMBER: "/api/groups/add",  //* add member into a particular group (admin only)
+        REMOVE_MEMBER: "/api/groups/remove",  //* remove member from particular group (admin only)
+        DELETE_GROUP: (groupId) => `/api/groups/${groupId}`,  //* delete a group (admin only)
+    },
+
+    MESSAGES: {
+        SEND_MESSAGE: "/api/messages",  //* send a message into a particular group (admin & user both)
+        GET_MESSAGES: (groupId) => `/api/messages/${groupId}`,  //* get messages (admin & user both)
+        DELETE_MESSAGE: (messageId) => `/api/messages/${messageId}`,  //* delete messages from a group 
+    },
+
+    POLLS: {
+        GET_ALL_POLLS: "/api/polls",  //* get all polls (logged-in users)
+        CREATE_POLL: "/api/polls/create",  //* create poll (admin only)
+        VOTE_POLL: "/api/polls/vote",  //* vote on poll (logged-in users)
+
+        // GET_POLL_BY_ID: (pollId) => `/api/polls/${pollId}`,  //* optional (future use)
+    },
 };

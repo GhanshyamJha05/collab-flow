@@ -7,7 +7,7 @@ const flowSteps = [
         desc: "Team communication is scattered and tasks are unorganized."
     },
     {
-        title: "CollabFlow",
+        title: "Collab Flow",
         color: "text-blue-600",
         desc: "Centralized workspace with structured collaboration and task management."
     },
@@ -51,7 +51,7 @@ const AnimatedFlow = () => {
             <div className="max-w-6xl mx-auto text-center">
 
                 <h2 className="text-2xl font-bold mb-12">
-                    How CollabFlow Solves Real Problems
+                    How Collab Flow Solves Real Problems
                 </h2>
 
                 <motion.div

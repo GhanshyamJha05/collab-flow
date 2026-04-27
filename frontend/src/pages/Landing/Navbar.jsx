@@ -38,207 +38,150 @@ const Navbar = () => {
     return (
         <>
             {/* NAVBAR WRAPPER */}
-            <div className="fixed top-4 left-0 w-full z-50 flex justify-center px-3">
+            <div className="fixed top-3 left-0 w-full z-50 flex justify-center px-3">
 
-                <nav className="w-full max-w-6xl bg-white/80 backdrop-blur-xl border border-blue-100 shadow-md hover:shadow-blue-200 transition-all duration-300 rounded-2xl px-5 py-3 flex items-center justify-between">
+                <nav className="w-full max-w-6xl bg-white/70 backdrop-blur-lg border border-gray-100 shadow-sm rounded-4xl px-4 py-2.5 flex items-center justify-between transition-all duration-300">
 
-                    {/* LEFT (UPDATED ONLY HERE) */}
+                    {/* LEFT */}
                     <div className="flex items-center justify-between w-full md:w-auto gap-3">
 
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
                             <button
-                                className="md:hidden text-blue-600 hover:scale-110 transition"
+                                className="md:hidden text-indigo-600 cursor-pointer"
                                 onClick={() => setIsOpen(!isOpen)}
                             >
-                                {isOpen ? <X size={26} /> : <Menu size={26} />}
+                                {isOpen ? <X size={24} /> : <Menu size={24} />}
                             </button>
 
                             <h1
                                 onClick={() => navigate("/")}
-                                className="text-lg md:text-xl font-bold text-blue-600 cursor-pointer tracking-wide hover:opacity-80 transition"
+                                className="text-base md:text-lg font-bold text-indigo-600 cursor-pointer tracking-wide"
                             >
                                 Collab Flow
                             </h1>
                         </div>
 
-                        {/* MOBILE PROFILE ICON (UPDATED FOR DROPDOWN) */}
+                        {/* MOBILE PROFILE ICON (unchanged) */}
                         <div
                             className="md:hidden flex items-center relative"
                             ref={dropdownRef}
-                            onClick={(e) => e.stopPropagation()} 
+                            onClick={(e) => e.stopPropagation()}
                         >
                             {user && (
                                 <div
                                     className="cursor-pointer"
                                     onClick={(e) => {
-                                        e.stopPropagation(); 
-                                        setIsDropdownOpen((prev) => !prev);
+                                        e.stopPropagation();
+                                        navigate(user.role === "admin" ? "/admin/dashboard" : "/user/dashboard");
                                     }}
                                 >
                                     {user.profileImage ? (
                                         <img
                                             src={user.profileImage}
-                                            alt="profile"
-                                            className="w-8 h-8 rounded-full object-cover border"
+                                            className="w-7 h-7 rounded-full object-cover border"
                                         />
                                     ) : (
-                                        <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold uppercase">
+                                        <div className="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold uppercase">
                                             {user.name?.charAt(0)}
                                         </div>
                                     )}
                                 </div>
                             )}
 
-                            {/* MOBILE DROPDOWN */}
-                            {isDropdownOpen && (
-                                <div
-                                    className="absolute right-0 top-10 w-56 bg-white/95 backdrop-blur-xl border border-blue-100 shadow-2xl rounded-2xl overflow-hidden z-50"
-                                    onClick={(e) => e.stopPropagation()}   // ✅ VERY IMPORTANT
-                                >
-
-                                    <DropdownItem
-                                        label="Dashboard"
-                                        onClick={() => {
-                                            setIsDropdownOpen(false);
-                                            setIsOpen(false);
-                                            navigate(user.role === "admin"
-                                                ? "/admin/dashboard"
-                                                : "/user/dashboard"
-                                            );
-                                        }}
-                                    />
-
-                                    <DropdownItem
-                                        label={user.role === "admin" ? "Manage Tasks" : "My Tasks"}
-                                        onClick={() => {
-                                            setIsDropdownOpen(false);
-                                            setIsOpen(false);
-                                            navigate(user.role === "admin"
-                                                ? "/admin/tasks"
-                                                : "/user/tasks"
-                                            );
-                                        }}
-                                    />
-
-                                    <div className="h-px bg-blue-100 my-1" />
-
-                                    <DropdownItem
-                                        label="Logout"
-                                        danger
-                                        onClick={() => {
-                                            setIsDropdownOpen(false);
-                                            setIsOpen(false);
-                                            localStorage.removeItem("token");
-                                            window.location.reload();
-                                        }}
-                                    />
-                                </div>
-                            )}
                         </div>
-
                     </div>
 
-                    {/* CENTER LINKS */}
+                    {/* CENTER LINKS (UPDATED UNDERLINE STYLE) */}
                     <div className="hidden md:flex gap-6">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                to={link.path}
-                                className="relative group px-2 py-1 font-medium"
-                            >
-                                <span
-                                    className={`transition duration-300 ${location.pathname === link.path
-                                        ? "text-blue-600"
-                                        : "text-gray-700 group-hover:text-blue-600"
-                                        }`}
-                                >
-                                    {link.name}
-                                </span>
 
-                                <span
-                                    className={`absolute left-0 -bottom-1 h-0.5 rounded-full bg-linear-to-r from-blue-600 to-blue-400 transition-all duration-300 ${location.pathname === link.path
-                                        ? "w-full"
-                                        : "w-0 group-hover:w-full"
-                                        }`}
-                                />
-                            </Link>
-                        ))}
+                        {navLinks.map((link) => {
+                            const isActive = location.pathname === link.path;
+
+                            return (
+                                <Link
+                                    key={link.name}
+                                    to={link.path}
+                                    className="relative px-1 py-1 font-semibold text-sm cursor-pointer group"
+                                >
+                                    <span
+                                        className={`transition duration-200 ${isActive ? "text-indigo-600" : "text-gray-700 group-hover:text-indigo-600"
+                                            }`}
+                                    >
+                                        {link.name}
+                                    </span>
+
+                                    {/* underline */}
+                                    <span
+                                        className={`
+                                    absolute left-0 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-indigo-600 to-sky-500 transition-all duration-300
+                                    ${isActive ? "w-full" : "w-0 group-hover:w-full"}
+                                `}
+                                    />
+                                </Link>
+                            );
+                        })}
                     </div>
 
-                    {/* RIGHT SECTION (UNCHANGED) */}
-                    <div className="hidden md:flex items-center gap-4">
+                    {/* RIGHT SECTION */}
+                    <div className="hidden md:flex items-center gap-3">
 
                         {!user ? (
                             <>
                                 <Link to="/login">
-                                    <button className="px-5 py-1.5 border border-blue-500 text-blue-600 rounded-full transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-lg active:scale-95 cursor-pointer">
+                                    <button className="px-6 py-2 text-base font-semibold text-blue-600 border border-blue-600 rounded-full bg-white transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
                                         Login
                                     </button>
                                 </Link>
 
                                 <Link to="/signup">
-                                    <button className="px-5 py-1.5 bg-linear-to-r from-blue-600 via-blue-500 to-blue-400 text-white rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 relative overflow-hidden cursor-pointer">
-                                        <span className="absolute inset-0 bg-white/20 opacity-0 hover:opacity-100 transition blur-md"></span>
-                                        <span className="relative z-10">Signup</span>
+                                    <button className="px-6 py-2 text-base font-semibold text-white rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-200 cursor-pointer">
+                                        Signup
                                     </button>
                                 </Link>
                             </>
                         ) : (
                             <div className="relative select-none" ref={dropdownRef}>
 
-                                {/* PROFILE BUTTON */}
                                 <div
                                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                    className="flex items-center gap-3 cursor-pointer group px-2 py-1 rounded-xl transition-all duration-300"
+                                    className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded-lg"
                                 >
                                     {user.profileImage ? (
                                         <img
                                             src={user.profileImage}
-                                            alt="profile"
-                                            className="w-10 h-10 rounded-full object-cover border border-blue-200 group-hover:scale-105 transition"
+                                            className="w-8 h-8 rounded-full object-cover border border-gray-200"
                                         />
                                     ) : (
-                                        <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold uppercase group-hover:scale-105 transition shadow-md">
+                                        <div className="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-sm font-bold uppercase">
                                             {user.name?.charAt(0)}
                                         </div>
                                     )}
 
-                                    <span className="font-semibold text-gray-800 text-base group-hover:text-blue-600 transition tracking-wide">
+                                    <span className="font-semibold text-sm text-gray-800">
                                         {user.name}
                                     </span>
                                 </div>
 
-                                {/* DROPDOWN */}
                                 {isDropdownOpen && (
-                                    <div className="absolute right-0 mt-3 w-60 bg-white/95 backdrop-blur-xl border border-blue-100 shadow-2xl rounded-2xl overflow-hidden animate-fadeIn z-50">
+                                    <div className="absolute right-0 mt-2 w-56 bg-white/95 backdrop-blur-xl border border-gray-100 shadow-xl rounded-xl overflow-hidden z-50">
 
-                                        <DropdownItem
-                                            label="Dashboard"
-                                            onClick={() => {
-                                                setIsDropdownOpen(false);
-                                                navigate(user.role === "admin" ? "/admin/dashboard" : "/user/dashboard");
-                                            }}
-                                        />
+                                        <DropdownItem label="Dashboard" onClick={() => {
+                                            setIsDropdownOpen(false);
+                                            navigate(user.role === "admin" ? "/admin/dashboard" : "/user/dashboard");
+                                        }} />
 
-                                        <DropdownItem
-                                            label={user.role === "admin" ? "Manage Tasks" : "My Tasks"}
-                                            onClick={() => {
-                                                setIsDropdownOpen(false);
-                                                navigate(user.role === "admin" ? "/admin/tasks" : "/user/tasks");
-                                            }}
-                                        />
+                                        <DropdownItem label={user.role === "admin" ? "Manage Tasks" : "My Tasks"} onClick={() => {
+                                            setIsDropdownOpen(false);
+                                            navigate(user.role === "admin" ? "/admin/tasks" : "/user/tasks");
+                                        }} />
 
-                                        <div className="h-px bg-blue-100 my-1" />
+                                        <div className="h-px bg-gray-100 my-1" />
 
-                                        <DropdownItem
-                                            label="Logout"
-                                            danger
-                                            onClick={() => {
-                                                setIsDropdownOpen(false);
-                                                localStorage.removeItem("token");
-                                                window.location.reload();
-                                            }}
-                                        />
+                                        <DropdownItem label="Logout" danger onClick={() => {
+                                            setIsDropdownOpen(false);
+                                            localStorage.removeItem("token");
+                                            window.location.reload();
+                                        }} />
                                     </div>
                                 )}
                             </div>
@@ -247,7 +190,7 @@ const Navbar = () => {
                 </nav>
             </div>
 
-            {/* MOBILE DRAWER (UNCHANGED) */}
+            {/* MOBILE DRAWER */}
             <div
                 className={`fixed top-0 left-0 h-full w-72 bg-white z-50 shadow-xl transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
@@ -256,20 +199,21 @@ const Navbar = () => {
 
                     <button
                         onClick={() => setIsOpen(false)}
-                        className="mb-6 text-blue-600 hover:scale-110 transition"
+                        className="mb-6 text-indigo-600 cursor-pointer"
                     >
-                        <X size={28} />
+                        <X size={26} />
                     </button>
 
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-3">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 to={link.path}
                                 onClick={() => setIsOpen(false)}
-                                className={`px-3 py-2 rounded-lg text-lg font-medium transition ${location.pathname === link.path
-                                    ? "bg-blue-100 text-blue-600"
-                                    : "text-gray-700 hover:bg-blue-50"
+                                className={`px-3 py-2 rounded-xl text-base font-semibold transition cursor-pointer
+                            ${location.pathname === link.path
+                                        ? "bg-indigo-100 text-indigo-600"
+                                        : "text-gray-700"
                                     }`}
                             >
                                 {link.name}
@@ -282,13 +226,13 @@ const Navbar = () => {
                         {!user ? (
                             <>
                                 <Link to="/login" onClick={() => setIsOpen(false)}>
-                                    <button className="w-full border border-blue-500 py-2 rounded-full text-blue-600 hover:bg-blue-600 hover:text-white transition">
+                                    <button className="w-full py-2 rounded-full text-indigo-600 border border-indigo-200 font-semibold cursor-pointer">
                                         Login
                                     </button>
                                 </Link>
 
                                 <Link to="/signup" onClick={() => setIsOpen(false)}>
-                                    <button className="w-full bg-linear-to-r from-blue-600 to-blue-500 text-white py-2 rounded-full hover:scale-105 transition shadow">
+                                    <button className="w-full py-2 rounded-full text-white font-semibold bg-gradient-to-r from-indigo-600 to-sky-500 shadow cursor-pointer">
                                         Signup
                                     </button>
                                 </Link>
@@ -297,29 +241,18 @@ const Navbar = () => {
                             <div
                                 onClick={() => {
                                     setIsOpen(false);
-                                    navigate(
-                                        user.role === "admin"
-                                            ? "/admin/dashboard"
-                                            : "/user/dashboard"
-                                    );
+                                    navigate(user.role === "admin" ? "/admin/dashboard" : "/user/dashboard");
                                 }}
-                                className="flex items-center gap-3 bg-blue-50 p-3 rounded-lg cursor-pointer"
+                                className="flex items-center gap-3 bg-gray-100 p-3 rounded-xl cursor-pointer"
                             >
                                 {user.profileImage ? (
-                                    <img
-                                        src={user.profileImage}
-                                        alt="profile"
-                                        className="w-10 h-10 rounded-full object-cover"
-                                    />
+                                    <img src={user.profileImage} className="w-9 h-9 rounded-full object-cover" />
                                 ) : (
-                                    <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+                                    <div className="w-9 h-9 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold">
                                         {user.name?.charAt(0)}
                                     </div>
                                 )}
-
-                                <span className="font-semibold text-gray-700">
-                                    {user.name}
-                                </span>
+                                <span className="font-semibold text-gray-700">{user.name}</span>
                             </div>
                         )}
                     </div>
@@ -343,8 +276,7 @@ const DropdownItem = ({ label, onClick, danger }) => {
     return (
         <button
             onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
+                e.stopPropagation(); // keep this
                 onClick();
             }}
             className={`
