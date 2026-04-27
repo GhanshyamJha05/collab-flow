@@ -36,15 +36,19 @@ const getPolls = async (req, res) => {
     try {
         const now = new Date();
 
-        const polls = await Poll.find();
-
-        // auto-expire update
-        for (let poll of polls) {
-            if (poll.expiry < now && poll.status === "active") {
-                poll.status = "expired";
-                await poll.save();
+        // 🔥 1. Bulk update (fast + scalable)
+        await Poll.updateMany(
+            {
+                expiry: { $lt: now },
+                status: "active"
+            },
+            {
+                $set: { status: "expired" }
             }
-        }
+        );
+
+        // 🔥 2. Fresh data fetch after update
+        const polls = await Poll.find();
 
         res.json({
             success: true,
